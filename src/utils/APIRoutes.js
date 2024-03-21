@@ -1,4 +1,4 @@
-export const host = process.env.API_BASE_URL || "http://localhost:9090";
+export const host = process.env.API_BASE_URL || "https://backchatapp-kqru.onrender.com";
 export const registerRoute = `${host}/api/auth/register`;
 export const loginRoute = `${host}/api/auth/login`;
 export const setAvatarRoute = `${host}/api/auth/setAvatar`;
