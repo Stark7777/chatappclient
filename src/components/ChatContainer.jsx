@@ -27,14 +27,18 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
   /**
    * Init functions
    */
-  const initFunctions = async () => {
-    console.log(JSON.stringify(currentChat))
-    if (currentChat) {
-      await pickUser();
+  // Utiliza async/await correctamente para asegurar el flujo
+const initFunctions = async () => {
+  console.log(JSON.stringify(currentChat))
+  if (currentChat) {
+    const userPicked = await pickUser();
+    if (userPicked) {
       await getAllMessages();
       setinputEnable(true);
     }
   }
+}
+
 
   /**
    * Select user and assing an agent
