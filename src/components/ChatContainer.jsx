@@ -106,10 +106,11 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
     setinputEnable(false);
   }
 
-  useEffect(() => {
-    if (doRequest.current) initFunctions();
-    else doRequest.current = true;
-  }, [currentChat]);
+     useEffect(() => { 
+      if (currentChat) {
+        initFunctions();
+      }
+    }, [currentChat]);
 
 
 
