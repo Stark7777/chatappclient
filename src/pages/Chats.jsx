@@ -23,7 +23,7 @@ export default function Chats() {
     const userId  = currentUser._id;
     //const sessionId = localStorage.getItem("sessionID");
 
-    socket.current = io(host, { autoConnect: false });
+    socket.current = io(host, { autoConnect: true });
     socket.current.auth = {  userId  };
     socket.current.connect();
 
