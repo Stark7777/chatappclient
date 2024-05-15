@@ -18,8 +18,8 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
 
   const toastOptions = {
     //position: "bottom-right",
-    autoClose: 8000,
-    pauseOnHover: true,
+   // autoClose: 8000,
+  //pauseOnHover: true,
     draggable: true,
     theme: "dark",
   };
