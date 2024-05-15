@@ -45,14 +45,17 @@ const initFunctions = async () => {
    * @returns 
    */
   const pickUser = async () => {
+    console.log("Function PickUser...");
     if (currentUser) {
+      console.log("Picking user current...");
       const response = await axios.post(pickUserRoute, {
         agentId: currentUser._id,
         conversationId: currentChat._id,
         type: enums.ActivtyType.AssignetAgent,
         channelId: 2,
       });
-
+      console.log("Response PickUser");
+      console.log(response);
       if (response.status != 200) {
         toast.error("Internal error", toastOptions);
         return false;
