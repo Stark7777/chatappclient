@@ -18,8 +18,8 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
 
   const toastOptions = {
     //position: "bottom-right",
-   // autoClose: 8000,
-  //pauseOnHover: true,
+    // autoClose: 8000,
+    // pauseOnHover: true,
     draggable: true,
     theme: "dark",
   };
@@ -27,35 +27,29 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
   /**
    * Init functions
    */
-  // Utiliza async/await correctamente para asegurar el flujo
-const initFunctions = async () => {
-  console.log(JSON.stringify(currentChat))
-  if (currentChat) {
-    const userPicked = await pickUser();
-    if (userPicked) {
+  const initFunctions = async () => {
+    console.log("Current Chat");
+    console.log(JSON.stringify(currentChat))
+    if (currentChat) {
+      await pickUser();
       await getAllMessages();
       setinputEnable(true);
     }
   }
-}
-
 
   /**
    * Select user and assing an agent
    * @returns 
    */
   const pickUser = async () => {
-    console.log("Function PickUser...");
     if (currentUser) {
-      console.log("Picking user current...");
       const response = await axios.post(pickUserRoute, {
         agentId: currentUser._id,
         conversationId: currentChat._id,
         type: enums.ActivtyType.AssignetAgent,
-        channelId: 2,
+        channelId: 3,
       });
-      console.log("Response PickUser");
-      console.log(response);
+
       if (response.status != 200) {
         toast.error("Internal error", toastOptions);
         return false;
@@ -102,7 +96,7 @@ const initFunctions = async () => {
       agentId: currentUser._id,
       conversationId: currentChat._id,
       type: enums.ActivtyType.EndOfConversation,
-      channelId: 2,
+      channelId: 3,
     });
 
     if (response.status != 200) {
@@ -113,12 +107,16 @@ const initFunctions = async () => {
     setinputEnable(false);
   }
 
-  useEffect(() => {
-    if (doRequest.current) initFunctions();
-    else doRequest.current = true;
-  }, [currentChat]);
-
-
+  // useEffect(() => {
+  //   if (doRequest.current) initFunctions();
+  //   else doRequest.current = true;
+  // }, [currentChat]);
+    useEffect(() => { 
+      if (currentChat) {
+        initFunctions();
+      }
+    }, [currentChat]);
+    
 
   const handleSendMsg = async (msg) => {
     const response = await axios.post(sendMessageRoute, {
@@ -128,7 +126,7 @@ const initFunctions = async () => {
       agentId: currentUser._id,
       conversationId: currentChat._id,
       type: 1,
-      channelId: 2,
+      channelId: 3,
     });
 
     if (response.status != 200) {
