@@ -87,18 +87,14 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
 
   //handleHang
   const handleHang = async () => {
-   
-    // close conversation
-    const response = await axios.post(sendMessageRoute, {
-      from: currentUser._id,
-      to: currentChat._id,
-      text: 'Close conversation',
-      agentId: currentUser._id,
-      conversationId: currentChat._id,
-      type: enums.ActivtyType.EndOfConversation,
-      channelId: 3,
-    });
-
+    
+    // close conversation   
+     const response = await axios.post(pickUserRoute, {
+        agentId: currentUser._id,
+        conversationId: currentChat._id,
+        type: enums.ActivtyType.EndOfConversation,
+        channelId: 3,
+      });
     if (response.status != 200) {
       toast.error("Internal error", toastOptions);
       return false;
