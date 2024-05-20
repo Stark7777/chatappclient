@@ -102,7 +102,8 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
 
     setinputEnable(false);
   }
-
+  console.log("handleSendMsg");
+  console.log(handleSendMsg);
   // useEffect(() => {
   //   if (doRequest.current) initFunctions();
   //   else doRequest.current = true;
@@ -113,7 +114,7 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
       }
     }, [currentChat]);
     
-
+  
   const handleSendMsg = async (msg) => {
     const response = await axios.post(sendMessageRoute, {
       from: currentUser._id,
